@@ -171,5 +171,6 @@ CALL SYSTEM('gnuplot -p Psi.plt')
 close(1)
 close(2)
 close(3)
+close(4)
 
 end program
