@@ -42,6 +42,7 @@ open(1,file="x_y_u_v_Vtotal.dat",status='replace')
 open(2,file="velocity.plt",status='replace')
 open(3,file="x_y_Psi_omega.dat",status='replace')
 open(4,file="Psi.plt",status='replace')
+open(5,file="omega.plt",status='replace')
 
 
 
@@ -152,25 +153,35 @@ write(1,*)x(i,j),y(i,j),u(i,j),v(i,j),V_net(i,j)
 write(3,*)x(i,j),y(i,j),psi(i,j),omega(i,j)
 end do
 end do
+!plotting the dat files with color contours
+
 write(2,*)'set xlabel "x"'
 write(2,*)'set ylabel "y"'
 write(2,*)'set zlabel "V"'
 write(2,*)'set title "velocity"'
-write(2,*)'set autoscale xy'
 write(2,*)'plot "x_y_u_v_Vtotal.dat" using 1:2:5 with image'
 CALL SYSTEM('gnuplot -p velocity.plt')
 
 write(4,*)'set xlabel "x"'
 write(4,*)'set ylabel "y"'
-write(4,*)'set zlabel "Stream function"'
-write(4,*)'set title "Psi(Streamfunction)"'
-write(4,*)'set autoscale xy'
+write(4,*)'set zlabel "Stream Function"'
+write(4,*)'set title "Psi(stream function)"'
 write(4,*)'plot "x_y_Psi_omega.dat" using 1:2:3 with image'
 CALL SYSTEM('gnuplot -p Psi.plt')
+
+
+write(5,*)'set xlabel "x"'
+write(5,*)'set ylabel "y"'
+write(5,*)'set logscale zcb'
+write(5,*)'set zlabel "vorticity"'
+write(5,*)'set title "vorticity(Omega)'
+write(5,*)'plot "x_y_Psi_omega.dat" using 1:2:4 with image'
+CALL SYSTEM('gnuplot -p omega.plt')
 
 close(1)
 close(2)
 close(3)
 close(4)
+close(5)
 
-end program
+end program SV_method
