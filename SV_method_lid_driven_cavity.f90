@@ -158,25 +158,40 @@ end do
 write(2,*)'set xlabel "x"'
 write(2,*)'set ylabel "y"'
 write(2,*)'set zlabel "V"'
+write(2,*)'set style function pm3d'
+write(2,*)'set palette model RGB'
+write(2,*)'set size ratio 1.0'
 write(2,*)'set title "velocity"'
+write(2,*)'set palette rgb 33,13,10'
 write(2,*)'plot "x_y_u_v_Vtotal.dat" using 1:2:5 with image'
-CALL SYSTEM('gnuplot -p velocity.plt')
+
 
 write(4,*)'set xlabel "x"'
 write(4,*)'set ylabel "y"'
+write(4,*)'set style function pm3d'
+write(4,*)'set palette model RGB'
+write(4,*)'set palette rgb 33,13,10'
 write(4,*)'set zlabel "Stream Function"'
+write(4,*)'set size ratio 1.0'
 write(4,*)'set title "Psi(stream function)"'
 write(4,*)'plot "x_y_Psi_omega.dat" using 1:2:3 with image'
-CALL SYSTEM('gnuplot -p Psi.plt')
+
 
 
 write(5,*)'set xlabel "x"'
 write(5,*)'set ylabel "y"'
+write(5,*)'set style function pm3d'
+write(5,*)'set palette model RGB'
+write(5,*)'set palette rgb 33,13,10'
+write(5,*)'set size ratio 1.0'
 write(5,*)'set logscale zcb'
 write(5,*)'set zlabel "vorticity"'
 write(5,*)'set title "vorticity(Omega)'
 write(5,*)'plot "x_y_Psi_omega.dat" using 1:2:4 with image'
+
+CALL SYSTEM('gnuplot -p velocity.plt')
 CALL SYSTEM('gnuplot -p omega.plt')
+CALL SYSTEM('gnuplot -p Psi.plt')
 
 close(1)
 close(2)
