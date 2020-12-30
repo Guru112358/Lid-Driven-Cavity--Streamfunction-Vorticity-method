@@ -93,7 +93,7 @@ do time=1,nsteps
     do i=0,nx+1
        do j=0,ny+1
         if ((j.NE.0 ).AND.(j.NE.ny+1).AND.(i.NE.0) .AND.(i.NE.nx+1))then
-       psi(i,j)=0.25*((h**2)*omega(i,j)+psi(i+1,j)+psi(i-1,j)+psi(i,j+1)+psi(i,j-1));
+       psi(i,j)=0.25*((h**2)*omega(i,j)+psi(i+1,j)+psi(i-1,j)+psi(i,j+1)+psi(i,j-1))
        else
        end if
        u(i,j)=1.0
