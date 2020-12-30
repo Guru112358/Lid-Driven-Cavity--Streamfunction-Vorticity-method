@@ -9,7 +9,7 @@ integer,parameter::nx=100
 integer,parameter::ny=100
 !creating arrays
 real,dimension(0:nx+1,0:ny+1)::omega,psi,u,v ,domega_dt ,x,y,vort_rhs_laplacian,vort_rhs_advective ,omeganp1,psi_old,V_net,omega_old!streamfunction -psi,voricity -omega
-real::dx,dy,uwall,nu,dt,Tp,h,psi_residual,vorticity_residual,tol
+real::dx,dy,uwall,nu,dt,Tp,psi_residual,vorticity_residual,tol
 integer::i,j,nsteps,time
 
 dx=lx/nx
@@ -19,7 +19,7 @@ nu=0.01 !kinematic viscosity
 dt=0.001
 Tp=6.0
 nsteps=int(Tp/dt)
-h=dx
+
 
 !intitial guess for stream function and vorticity are set to zero
 psi(0:nx+1,0:ny+1)=0
@@ -93,7 +93,7 @@ do time=1,nsteps
     do i=0,nx+1
        do j=0,ny+1
         if ((j.NE.0 ).AND.(j.NE.ny+1).AND.(i.NE.0) .AND.(i.NE.nx+1))then
-       psi(i,j)=0.25*((h**2)*omega(i,j)+psi(i+1,j)+psi(i-1,j)+psi(i,j+1)+psi(i,j-1))
+        psi(i,j)=0.5*(((dx**2)*(dy**2))/((dx**2)+(dy**2)))*(omega(i,j)+((psi(i+1,j)+psi(i-1,j))/(dx**2))+((psi(i,j+1)+psi(i,j-1))/(dy**2)))
        else
        end if
        u(i,j)=1.0
